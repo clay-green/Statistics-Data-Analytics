@@ -41,6 +41,10 @@ pairs(data, panel=panel.smooth)
 ![](PredictingGrades_files/figure-html/tidy_data-1.png)<!-- -->
 
 ```r
+#myglm <- glm(FinalGrade == "A" ~ AnalysisTotal + FinalExam, data=Train, family = binomial)
+#summary(myglm)
+#b <- coef(myglm)
+
 myglm2 <- glm(FinalGrade == "A" ~ AnalysisTotal, data=Train, family = binomial)
 summary(myglm2)
 ```
@@ -74,6 +78,21 @@ summary(myglm2)
 ```r
 b <- coef(myglm2)
 
+#myglm3 <- glm(FinalGrade == "A" ~ FinalExam * ProjectTotal, data=Train, family = binomial)
+#summary(myglm3)
+#b <- coef(myglm3)
+
+#myglm4 <- glm(FinalGrade == "A" ~ FinalExam + ProjectTotal + AnalysisTotal, data=Train, family = binomial)
+#summary(myglm4)
+#b <- coef(myglm4)
+
+#myglm5 <- glm(FinalGrade == "A" ~ FinalExam + I(SkillsQuizzesTotal^3) + AnalysisTotal, data=Train, family = binomial)
+#summary(myglm5)
+#b <- coef(myglm5)
+
+#myglm6 <- glm(FinalGrade == "A" ~ AnalysisTotal * AssessmentQuizCompletionTotal, data=Train, family = binomial)
+#summary(myglm6)
+#b <- coef(myglm6)
 
 Train$FinalisA <- ifelse(Train$FinalGrade == "A", 1, 0)
 
@@ -113,8 +132,8 @@ mytest$FinalisA
 ```
 
 ```
-##  [1] 0 1 1 1 0 0 0 0 0 1 0 0 0 0 1 0 1 0 1 0 1 0 1 1 0 1 0 0 1 0 1 1 0 1 0 0 1 1
-## [39] 1 1 1 1 0 1 1 1 0 0 0 0
+##  [1] 0 1 0 1 0 0 0 1 0 1 0 1 1 0 1 0 0 1 1 0 0 1 1 0 0 0 0 1 1 0 1 0 1 1 1 1 0 1
+## [39] 1 1 0 1 0 1 1 1 1 0 0 0
 ```
 
 ```r
@@ -124,8 +143,8 @@ table(whatIguessWillHappen, mytest$FinalisA)
 ```
 ##                     
 ## whatIguessWillHappen  0  1
-##                    0 22  0
-##                    1  4 24
+##                    0 21  0
+##                    1  3 26
 ```
 
 ```r
